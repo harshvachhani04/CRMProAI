@@ -1,11 +1,25 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { BreadcrumbService } from '../../core/services/breadcrumb.service';
+import { LoadingBarComponent } from '../../core/components/loading-bar/loading-bar.component';
+import { ToastContainerComponent } from '../../core/components/toast/toast-container.component';
 
 @Component({
   selector: 'app-shell',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    LoadingBarComponent,
+    ToastContainerComponent
+  ],
   template: `
+    <app-loading-bar />
+    <app-toast-container />
+
     <div class="shell-container">
       <!-- Sidebar -->
       <aside class="sidebar" [class.open]="sidebarOpen()">
@@ -103,9 +117,19 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
           <div class="topbar-left">
             <button class="menu-toggle" (click)="toggleSidebar()">☰</button>
             <div class="breadcrumbs">
-              <span>Workspace</span>
-              <span class="separator">/</span>
-              <b class="current-crumb">CRMPro Operations</b>
+              <a routerLink="/dashboard" class="crumb-root">Workspace</a>
+              @for (crumb of breadcrumbService.breadcrumbs(); track crumb.url; let last = $last) {
+                <span class="separator">/</span>
+                @if (last) {
+                  <b class="current-crumb">{{ crumb.label }}</b>
+                } @else {
+                  <a [routerLink]="crumb.url" class="crumb-link">{{ crumb.label }}</a>
+                }
+              }
+              @if (breadcrumbService.breadcrumbs().length === 0) {
+                <span class="separator">/</span>
+                <b class="current-crumb">CRMPro Operations</b>
+              }
             </div>
           </div>
 
@@ -317,6 +341,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     .topbar-left { display: flex; align-items: center; gap: 14px; }
     .menu-toggle { display: none; background: none; border: 0; font-size: 18px; color: #64738e; }
     .breadcrumbs { font-size: 12px; color: #8993a5; display: flex; gap: 8px; align-items: center; }
+    .breadcrumbs .crumb-root, .breadcrumbs .crumb-link { color: #8993a5; transition: color 0.15s; }
+    .breadcrumbs .crumb-root:hover, .breadcrumbs .crumb-link:hover { color: #6254d5; }
     .breadcrumbs .separator { color: #cbd5e1; }
     .breadcrumbs .current-crumb { color: #1e293b; font-weight: 600; }
 
@@ -394,6 +420,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   `]
 })
 export class AppShellComponent {
+  readonly breadcrumbService = inject(BreadcrumbService);
   sidebarOpen = signal(false);
 
   toggleSidebar() {
