@@ -1,41 +1,31 @@
+using CRMProAI.Api.Extensions;
+using CRMProAI.Api.Middleware;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+// Register shared API conventions (Controllers, API Versioning, OpenAPI, FluentValidation)
+builder.Services.AddSharedApiConventions(builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// 1. Correlation ID Middleware (First in pipeline to track all downstream calls)
+app.UseMiddleware<CorrelationIdMiddleware>();
+
+// 2. Global Exception Handling Middleware (Translates unhandled exceptions to RFC 7807 ProblemDetails)
+app.UseMiddleware<GlobalExceptionMiddleware>();
+
+// 3. OpenAPI Documentation
+if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 {
     app.MapOpenApi();
 }
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+// 4. Map API Controllers
+app.MapControllers();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+// Assembly entrypoint marker for integration tests
+public partial class Program { }

@@ -19,7 +19,7 @@ This document tracks progress against the **108 Micro-Phases (P000–P107)** def
 | **P003** | `[x]` | Create .NET solution | Create API, Domain, Application, Infrastructure, Worker and Contracts projects. | Solution builds; dependency graph is correct. |
 | **P004** | `[x]` | Create test projects | Add Domain, Application, Infrastructure, API and Architecture tests. | All test projects run in CI. |
 | **P005** | `[x]` | Create Angular workspace | Create Angular app, PrimeNG, Tailwind, lint/test config and base routes. | App builds and displays shell. |
-| **P006** | `[ ]` | Shared backend conventions | ProblemDetails, correlation ID, API versioning, Swagger, validation pipeline and exception middleware. | Standard success/error responses tested. |
+| **P006** | `[x]` | Shared backend conventions | ProblemDetails, correlation ID, API versioning, Swagger, validation pipeline and exception middleware. | Standard success/error responses tested. |
 | **P007** | `[ ]` | Shared frontend shell | Authenticated layout, navigation, breadcrumb, toast, loading and error components. | Responsive shell works. |
 | **P008** | `[ ]` | EF Core baseline | DbContext, naming conventions, UTC handling, configurations, migration assembly and initial migration. | Migration applies to empty local DB. |
 
