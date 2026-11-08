@@ -77,6 +77,145 @@ namespace CRMProAI.Infrastructure.Persistence.Migrations
 
                     b.ToTable("baseline_probes", (string)null);
                 });
+
+            modelBuilder.Entity("CRMProAI.Domain.Modules.Tenancy.Tenant", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset?>("ArchivedAtUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("archived_at_utc");
+
+                    b.Property<Guid?>("ArchivedByUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("archived_by_user_id");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("created_by_user_id");
+
+                    b.Property<bool>("IsArchived")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_archived");
+
+                    b.Property<string>("LegalName")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("legal_name");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(63)
+                        .HasColumnType("character varying(63)")
+                        .HasColumnName("slug");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("status");
+
+                    b.Property<DateTimeOffset?>("UpdatedAtUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<Guid?>("UpdatedByUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("updated_by_user_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_tenants");
+
+                    b.HasIndex("Slug")
+                        .IsUnique()
+                        .HasDatabaseName("ix_tenants_slug");
+
+                    b.ToTable("tenants", (string)null);
+                });
+
+            modelBuilder.Entity("CRMProAI.Domain.Modules.Tenancy.Tenant", b =>
+                {
+                    b.OwnsOne("CRMProAI.Domain.Modules.Tenancy.TenantSettings", "Settings", b1 =>
+                        {
+                            b1.Property<Guid>("TenantId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("id");
+
+                            b1.Property<string>("Address")
+                                .HasMaxLength(500)
+                                .HasColumnType("character varying(500)")
+                                .HasColumnName("settings_address");
+
+                            b1.Property<string>("DefaultCurrency")
+                                .IsRequired()
+                                .ValueGeneratedOnAdd()
+                                .HasMaxLength(10)
+                                .HasColumnType("character varying(10)")
+                                .HasDefaultValue("USD")
+                                .HasColumnName("settings_default_currency");
+
+                            b1.Property<string>("DefaultLocale")
+                                .IsRequired()
+                                .ValueGeneratedOnAdd()
+                                .HasMaxLength(20)
+                                .HasColumnType("character varying(20)")
+                                .HasDefaultValue("en-US")
+                                .HasColumnName("settings_default_locale");
+
+                            b1.Property<string>("DefaultTimezone")
+                                .IsRequired()
+                                .ValueGeneratedOnAdd()
+                                .HasMaxLength(100)
+                                .HasColumnType("character varying(100)")
+                                .HasDefaultValue("UTC")
+                                .HasColumnName("settings_default_timezone");
+
+                            b1.Property<string>("Industry")
+                                .HasMaxLength(100)
+                                .HasColumnType("character varying(100)")
+                                .HasColumnName("settings_industry");
+
+                            b1.Property<string>("LogoUrl")
+                                .HasMaxLength(1000)
+                                .HasColumnType("character varying(1000)")
+                                .HasColumnName("settings_logo_url");
+
+                            b1.Property<string>("SupportEmail")
+                                .HasMaxLength(256)
+                                .HasColumnType("character varying(256)")
+                                .HasColumnName("settings_support_email");
+
+                            b1.Property<string>("Website")
+                                .HasMaxLength(500)
+                                .HasColumnType("character varying(500)")
+                                .HasColumnName("settings_website");
+
+                            b1.HasKey("TenantId");
+
+                            b1.ToTable("tenants");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TenantId")
+                                .HasConstraintName("fk_tenants_tenants_id");
+                        });
+
+                    b.Navigation("Settings")
+                        .IsRequired();
+                });
 #pragma warning restore 612, 618
         }
     }

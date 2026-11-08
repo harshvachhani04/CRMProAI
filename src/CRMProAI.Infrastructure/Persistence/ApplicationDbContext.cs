@@ -19,6 +19,7 @@ public class ApplicationDbContext : DbContext
     public bool HasTenant => _tenantContext?.HasTenant ?? false;
 
     public DbSet<CRMProAI.Domain.Entities.BaselineProbe> BaselineProbes => Set<CRMProAI.Domain.Entities.BaselineProbe>();
+    public DbSet<CRMProAI.Domain.Modules.Tenancy.Tenant> Tenants => Set<CRMProAI.Domain.Modules.Tenancy.Tenant>();
 
     public ApplicationDbContext(
         DbContextOptions<ApplicationDbContext> options,

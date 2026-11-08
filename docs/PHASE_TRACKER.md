@@ -29,7 +29,7 @@ This document tracks progress against the **108 Micro-Phases (P000–P107)** def
 
 | ID | Status | Micro-Phase | Implementation Work | Exit Gate |
 |:---:|:---:|---|---|---|
-| **P009** | `[ ]` | Tenant entity and seed | Tenant aggregate, tenant settings, seed/demo tenant and tenant context abstraction. | Tenant created and loaded from trusted context. |
+| **P009** | `[x]` | Tenant entity and seed | Tenant aggregate, tenant settings, seed/demo tenant and tenant context abstraction. | Tenant created and loaded from trusted context. |
 | **P010** | `[ ]` | Tenant resolution middleware | Resolve tenant from auth claim/host mapping; reject untrusted tenant override. | API tenant context tests pass. |
 | **P011** | `[ ]` | Tenant query filter | Apply tenant filters to tenant-owned entities and safe bypass policy. | Cross-tenant integration tests pass. |
 | **P012** | `[ ]` | PostgreSQL RLS defense | Implement transaction-scoped tenant context and RLS policies where selected. | RLS tests prove isolation under raw SQL too. |

@@ -1,3 +1,4 @@
+using CRMProAI.Application.Common;
 using CRMProAI.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,11 @@ public static class DependencyInjection
             });
             options.UseSnakeCaseNamingConvention();
         });
+
+        // Register tenant context abstractions
+        services.AddScoped<TenantContext>();
+        services.AddScoped<ITenantContext>(sp => sp.GetRequiredService<TenantContext>());
+        services.AddScoped<ITenantSetter>(sp => sp.GetRequiredService<TenantContext>());
 
         return services;
     }
