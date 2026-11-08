@@ -1,0 +1,75 @@
+name: crmpro-ai-dev
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: crmpro-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-crmpro_dev}
+      POSTGRES_USER: ${POSTGRES_USER:-crmpro_app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-crmpro_dev_password_2026}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - crmpro_postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-crmpro_app} -d ${POSTGRES_DB:-crmpro_dev}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - crmpro_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: crmpro-redis
+    restart: unless-stopped
+    command: ["redis-server", "--save", "60", "1", "--loglevel", "warning", "--requirepass", "${REDIS_PASSWORD:-crmpro_redis_dev_2026}"]
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - crmpro_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-crmpro_redis_dev_2026}", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - crmpro_network
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: crmpro-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-crmpro_user}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-crmpro_rabbit_dev_2026}
+    ports:
+      - "${RABBITMQ_PORT:-5672}:5672"
+      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
+    volumes:
+      - crmpro_rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - crmpro_network
+
+volumes:
+  crmpro_postgres_data:
+    name: crmpro_postgres_data
+  crmpro_redis_data:
+    name: crmpro_redis_data
+  crmpro_rabbitmq_data:
+    name: crmpro_rabbitmq_data
+
+networks:
+  crmpro_network:
+    name: crmpro_network
+    driver: bridge

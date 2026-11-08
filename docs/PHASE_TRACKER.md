@@ -15,7 +15,7 @@ This document tracks progress against the **108 Micro-Phases (P000–P107)** def
 |:---:|:---:|---|---|---|
 | **P000** | `[x]` | Repository and delivery baseline | Create Git repo, branch strategy, README, coding standards, editor config, .gitignore, license inventory, issue board. | Repo builds or contains documented empty scaffold; no secrets committed. |
 | **P001** | `[x]` | Architecture decision records | Record modular monolith, Clean Architecture, tenancy, auth, API versioning, database, AI provider abstraction and deployment decisions. | ADRs reviewed and versioned. |
-| **P002** | `[ ]` | Local developer environment | Docker Compose for PostgreSQL+pgvector, Redis, RabbitMQ; health checks and named volumes. | One command starts dependencies; health checks pass. |
+| **P002** | `[x]` | Local developer environment | Docker Compose for PostgreSQL+pgvector, Redis, RabbitMQ; health checks and named volumes. | One command starts dependencies; health checks pass. |
 | **P003** | `[ ]` | Create .NET solution | Create API, Domain, Application, Infrastructure, Worker and Contracts projects. | Solution builds; dependency graph is correct. |
 | **P004** | `[ ]` | Create test projects | Add Domain, Application, Infrastructure, API and Architecture tests. | All test projects run in CI. |
 | **P005** | `[ ]` | Create Angular workspace | Create Angular app, PrimeNG, Tailwind, lint/test config and base routes. | App builds and displays shell. |
