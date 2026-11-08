@@ -1,0 +1,122 @@
+@import "primeicons/primeicons.css";
+
+/* CRMPro AI Custom Design System & CSS Variables */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #111d38;
+  --navy-light: #18284d;
+  --ink: #202b43;
+  --muted: #8993a5;
+  --line: #e9edf3;
+  --bg: #f6f8fc;
+  --card-bg: #ffffff;
+  --purple: #7667e8;
+  --purple-hover: #6657d8;
+  --purple-light: #f0efff;
+  --green: #25ad7e;
+  --green-light: #e8f8f1;
+  --blue: #5a94df;
+  --blue-light: #eaf3ff;
+  --orange: #e99b46;
+  --orange-light: #fff3e7;
+  --pink: #d96f92;
+  --pink-light: #ffebf1;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 14px 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Utilities */
+.hidden { display: none !important; }
+
+/* Buttons */
+.primary-btn {
+  border: 0;
+  border-radius: 8px;
+  background: var(--purple);
+  color: #fff;
+  padding: 10px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(118, 103, 232, 0.25);
+  transition: all 0.2s ease;
+}
+
+.primary-btn:hover {
+  background: var(--purple-hover);
+  transform: translateY(-1px);
+}
+
+.secondary-btn {
+  border: 1px solid #e2e6ef;
+  background: #fff;
+  color: #59657b;
+  border-radius: 8px;
+  padding: 9px 15px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.secondary-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Badges & Status Tags */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status-badge.new { background: var(--blue-light); color: var(--blue); }
+.status-badge.qualified { background: var(--purple-light); color: var(--purple); }
+.status-badge.proposal { background: #f0edff; color: #7768d9; }
+.status-badge.negotiation { background: var(--orange-light); color: var(--orange); }
+.status-badge.won { background: var(--green-light); color: var(--green); }
+.status-badge.lost { background: #fee2e2; color: #ef4444; }
+
+/* Cards & Surfaces */
+.card-surface {
+  background: #fff;
+  border: 1px solid #edf0f5;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(25, 39, 70, 0.05);
+  transition: box-shadow 0.2s ease;
+}
+
+.card-surface:hover {
+  box-shadow: 0 8px 30px rgba(25, 39, 70, 0.08);
+}
