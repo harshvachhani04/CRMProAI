@@ -7,4 +7,11 @@
     <Project Path="src/CRMProAI.Infrastructure/CRMProAI.Infrastructure.csproj" />
     <Project Path="src/CRMProAI.Worker/CRMProAI.Worker.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CRMProAI.Domain.UnitTests/CRMProAI.Domain.UnitTests.csproj" />
+    <Project Path="tests/CRMProAI.Application.UnitTests/CRMProAI.Application.UnitTests.csproj" />
+    <Project Path="tests/CRMProAI.Infrastructure.IntegrationTests/CRMProAI.Infrastructure.IntegrationTests.csproj" />
+    <Project Path="tests/CRMProAI.Api.IntegrationTests/CRMProAI.Api.IntegrationTests.csproj" />
+    <Project Path="tests/CRMProAI.ArchitectureTests/CRMProAI.ArchitectureTests.csproj" />
+  </Folder>
 </Solution>
