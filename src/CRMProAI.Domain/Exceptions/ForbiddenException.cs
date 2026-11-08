@@ -5,8 +5,8 @@ namespace CRMProAI.Domain.Exceptions;
 /// </summary>
 public class ForbiddenException : DomainException
 {
-    public ForbiddenException(string message = "You do not have permission to perform this action.")
-        : base(message, "FORBIDDEN")
+    public ForbiddenException(string message = "You do not have permission to perform this action.", string code = "FORBIDDEN")
+        : base(message, code)
     {
     }
 }

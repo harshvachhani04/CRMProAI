@@ -34,6 +34,21 @@ public class HealthController : BaseApiController
     }
 
     /// <summary>
+    /// Probe verifying active tenant resolution from claims, headers, or host mapping.
+    /// </summary>
+    [HttpGet("tenant-context")]
+    public ActionResult<ApiResponse<object>> GetTenantContext()
+    {
+        return OkResponse<object>(new
+        {
+            tenantId = TenantId,
+            tenantSlug = TenantSlug,
+            hasTenant = HasTenant,
+            correlationId = CorrelationId
+        }, HasTenant ? "Tenant resolved successfully" : "No active tenant in context");
+    }
+
+    /// <summary>
     /// Test endpoint demonstrating validation failure handling (400 Bad Request ProblemDetails).
     /// </summary>
     [HttpPost("test-validation")]

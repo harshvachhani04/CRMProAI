@@ -18,7 +18,10 @@ app.UseMiddleware<CorrelationIdMiddleware>();
 // 2. Global Exception Handling Middleware (Translates unhandled exceptions to RFC 7807 ProblemDetails)
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
-// 3. OpenAPI Documentation
+// 3. Tenant Resolution Middleware (Resolves trusted tenant context, enforces isolation)
+app.UseMiddleware<TenantResolutionMiddleware>();
+
+// 4. OpenAPI Documentation
 if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 {
     app.MapOpenApi();
@@ -26,7 +29,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 
 app.UseHttpsRedirection();
 
-// 4. Map API Controllers
+// 5. Map API Controllers
 app.MapControllers();
 
 app.Run();

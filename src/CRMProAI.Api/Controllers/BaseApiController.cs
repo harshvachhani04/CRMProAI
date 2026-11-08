@@ -11,6 +11,15 @@ public abstract class BaseApiController : ControllerBase
     protected string CorrelationId =>
         HttpContext.Items["CorrelationId"]?.ToString() ?? HttpContext.TraceIdentifier;
 
+    protected Guid TenantId =>
+        HttpContext.Items["TenantId"] is Guid tenantId ? tenantId : Guid.Empty;
+
+    protected string? TenantSlug =>
+        HttpContext.Items["TenantSlug"] as string;
+
+    protected bool HasTenant =>
+        TenantId != Guid.Empty;
+
     protected ActionResult<ApiResponse<T>> OkResponse<T>(T data, string message = "Success")
     {
         return Ok(new ApiResponse<T>(data, message));

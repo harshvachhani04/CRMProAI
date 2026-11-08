@@ -45,6 +45,27 @@ public class HealthControllerTests
     }
 
     [Fact]
+    public void GetTenantContext_WhenTenantInContext_ReturnsOkWithTenantDetails()
+    {
+        // Arrange
+        var testTenantId = Guid.NewGuid();
+        _controller.HttpContext.Items["TenantId"] = testTenantId;
+        _controller.HttpContext.Items["TenantSlug"] = "northstar";
+
+        // Act
+        var result = _controller.GetTenantContext();
+
+        // Assert
+        result.Result.Should().BeOfType<OkObjectResult>();
+        var okResult = result.Result as OkObjectResult;
+        okResult!.StatusCode.Should().Be(200);
+
+        var response = okResult.Value as ApiResponse<object>;
+        response.Should().NotBeNull();
+        response!.Message.Should().Be("Tenant resolved successfully");
+    }
+
+    [Fact]
     public async Task TestValidation_WhenInvalidPayload_ThrowsValidationException()
     {
         // Arrange
