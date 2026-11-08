@@ -1,7 +1,11 @@
 using CRMProAI.Api.Extensions;
 using CRMProAI.Api.Middleware;
+using CRMProAI.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Register Infrastructure (EF Core PostgreSQL DbContext, etc.)
+builder.Services.AddInfrastructure(builder.Configuration);
 
 // Register shared API conventions (Controllers, API Versioning, OpenAPI, FluentValidation)
 builder.Services.AddSharedApiConventions(builder.Configuration);

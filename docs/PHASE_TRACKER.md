@@ -21,7 +21,7 @@ This document tracks progress against the **108 Micro-Phases (P000–P107)** def
 | **P005** | `[x]` | Create Angular workspace | Create Angular app, PrimeNG, Tailwind, lint/test config and base routes. | App builds and displays shell. |
 | **P006** | `[x]` | Shared backend conventions | ProblemDetails, correlation ID, API versioning, Swagger, validation pipeline and exception middleware. | Standard success/error responses tested. |
 | **P007** | `[x]` | Shared frontend shell | Authenticated layout, navigation, breadcrumb, toast, loading and error components. | Responsive shell works. |
-| **P008** | `[ ]` | EF Core baseline | DbContext, naming conventions, UTC handling, configurations, migration assembly and initial migration. | Migration applies to empty local DB. |
+| **P008** | `[x]` | EF Core baseline | DbContext, naming conventions, UTC handling, configurations, migration assembly and initial migration. | Migration applies to empty local DB. |
 
 ---
 
