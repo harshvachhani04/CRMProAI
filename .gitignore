@@ -1,0 +1,78 @@
+## .NET Core / C#
+bin/
+obj/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.pidb
+*.booproj
+*.svclog
+*.visualstudio
+.vs/
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+_ReSharper*/
+*.dotCover
+
+## Application Secrets & Local Config
+appsettings.Development.local.json
+appsettings.local.json
+secrets.json
+*.pfx
+*.cer
+*.key
+*.pem
+.env
+.env.local
+.env.*.local
+
+## Node.js & Angular
+node_modules/
+dist/
+.angular/
+.npm/
+.yarn/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+coverage/
+.nx/
+
+## Local Databases & Containers
+pgdata/
+redisdata/
+rabbitmqdata/
+*.db
+*.sqlite
+*.sqlite3
+
+## IDE & Editors
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.swp
+*.swo
+*~
+
+## OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+## Temporary & Log files
+logs/
+*.log
+scratch/
+tmp/
+temp/
