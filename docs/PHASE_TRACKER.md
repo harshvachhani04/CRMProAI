@@ -31,7 +31,7 @@ This document tracks progress against the **108 Micro-Phases (P000–P107)** def
 |:---:|:---:|---|---|---|
 | **P009** | `[x]` | Tenant entity and seed | Tenant aggregate, tenant settings, seed/demo tenant and tenant context abstraction. | Tenant created and loaded from trusted context. |
 | **P010** | `[x]` | Tenant resolution middleware | Resolve tenant from auth claim/host mapping; reject untrusted tenant override. | API tenant context tests pass. |
-| **P011** | `[ ]` | Tenant query filter | Apply tenant filters to tenant-owned entities and safe bypass policy. | Cross-tenant integration tests pass. |
+| **P011** | `[x]` | Tenant query filter | Apply tenant filters to tenant-owned entities and safe bypass policy. | Cross-tenant integration tests pass. |
 | **P012** | `[ ]` | PostgreSQL RLS defense | Implement transaction-scoped tenant context and RLS policies where selected. | RLS tests prove isolation under raw SQL too. |
 | **P013** | `[ ]` | Identity integration | ASP.NET Core Identity tables, user entity, password policies and login. | Login/invalid login tests pass. |
 | **P014** | `[ ]` | JWT and refresh sessions | Access token, rotating refresh token, revocation, logout and refresh. | Token lifecycle tests pass. |

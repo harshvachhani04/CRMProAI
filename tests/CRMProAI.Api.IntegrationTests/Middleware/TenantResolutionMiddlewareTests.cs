@@ -196,7 +196,7 @@ public class TenantResolutionMiddlewareTests
         await using var dbContext = CreateDbContext();
 
         var suspendedTenantId = Guid.NewGuid();
-        var suspendedTenant = Tenant.Create(suspendedTenantId, "Suspended Org", "suspended-org");
+        var suspendedTenant = Tenant.Create(suspendedTenantId, "Suspended Org", $"suspended-org-{Guid.NewGuid():N}");
         suspendedTenant.Suspend("Account delinquent");
         dbContext.Tenants.Add(suspendedTenant);
         await dbContext.SaveChangesAsync();
