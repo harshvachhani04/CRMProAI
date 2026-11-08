@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CRMProAI.Api/CRMProAI.Api.csproj" />
+    <Project Path="src/CRMProAI.Application/CRMProAI.Application.csproj" />
+    <Project Path="src/CRMProAI.Contracts/CRMProAI.Contracts.csproj" />
+    <Project Path="src/CRMProAI.Domain/CRMProAI.Domain.csproj" />
+    <Project Path="src/CRMProAI.Infrastructure/CRMProAI.Infrastructure.csproj" />
+    <Project Path="src/CRMProAI.Worker/CRMProAI.Worker.csproj" />
+  </Folder>
+</Solution>
